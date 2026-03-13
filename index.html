@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Shark Streams</title>
+    <link rel="icon" href="https://sharkstreams.net/favicon.ico?v=1" sizes="any" />
+    <link rel="shortcut icon" href="https://sharkstreams.net/favicon.ico?v=1" />
+    <link rel="apple-touch-icon" href="https://sharkstreams.net/favicon.ico?v=1" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg0: #242529;
+        --bg1: #242529;
+        --surface: rgba(255, 255, 255, 0.06);
+        --surface2: rgba(255, 255, 255, 0.04);
+        --border: rgba(255, 255, 255, 0.12);
+        --border2: rgba(255, 255, 255, 0.08);
+        --text: rgba(255, 255, 255, 0.92);
+        --muted: rgba(255, 255, 255, 0.62);
+        --accent: #242529;
+        --accent2: #242529;
+        --shadow: 0 18px 55px rgba(0, 0, 0, 0.55);
+        --shadow2: 0 10px 26px rgba(0, 0, 0, 0.35);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans",
+          "Apple Color Emoji", "Segoe UI Emoji";
+        color: var(--text);
+        background: var(--bg0);
+      }
+
+      .page {
+        min-height: 100%;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+      }
+
+      .top {
+        padding: 16px 18px;
+        border-bottom: 1px solid var(--border2);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.08),
+          rgba(255, 255, 255, 0.03) 55%,
+          transparent
+        );
+        backdrop-filter: blur(10px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 750;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.92);
+      }
+
+      .brand img {
+        width: 22px;
+        height: 22px;
+        object-fit: contain;
+        border-radius: 6px;
+        box-shadow: var(--shadow2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(0, 0, 0, 0.25);
+      }
+
+      .main {
+        display: grid;
+        place-items: center;
+        gap: 14px;
+        padding: 22px 14px 22px;
+      }
+
+      .placement {
+        width: min(790px, 100%);
+        height: 28px;
+        border: 1px dashed rgba(255, 255, 255, 0.18);
+        background: rgba(0, 0, 0, 0.18);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255, 255, 255, 0.65);
+        font-size: 12px;
+        letter-spacing: 0.4px;
+        user-select: none;
+      }
+
+      .ad-slot {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        border-radius: 10px;
+        border: 1px solid var(--border2);
+        background: var(--surface2);
+        box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
+      }
+
+      .ad-slot--728x90 {
+        width: min(728px, 100%);
+        min-height: 90px;
+      }
+
+      .ad-slot--468x60 {
+        width: min(468px, 100%);
+        min-height: 60px;
+      }
+
+      .ad-slot iframe {
+        max-width: 100%;
+        border: 0;
+        display: block;
+      }
+
+      .player-card {
+        width: min(980px, 100%);
+        border: 1px solid var(--border);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.045));
+        border-radius: 18px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .player-head {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--border2);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.06),
+          rgba(255, 255, 255, 0.02)
+        );
+        position: relative;
+      }
+
+      .title {
+        font-size: 14px;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.9);
+        flex: 1;
+        text-align: center;
+      }
+
+      .title-link {
+        color: inherit;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        justify-content: center;
+        padding: 4px 12px;
+        border-radius: 999px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        background: rgba(0, 0, 0, 0.22);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+      }
+
+      .title-link:hover {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
+      .title-link:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.22);
+        border-radius: 6px;
+      }
+
+      .status {
+        font-size: 12px;
+        color: var(--muted);
+        position: absolute;
+        right: 16px;
+      }
+
+      .player-wrap {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        background: #000;
+      }
+
+      .player-wrap iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
+      }
+
+      .foot {
+        padding: 6px 10px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 10px;
+        line-height: 1.25;
+        border-top: 1px solid var(--border2);
+        background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.22));
+      }
+
+      .foot a {
+        color: rgba(255, 255, 255, 0.78);
+        text-decoration: none;
+      }
+
+      .foot a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 520px) {
+        .top {
+          padding: 14px 12px;
+          gap: 10px;
+        }
+
+        .brand {
+          font-size: 14px;
+          letter-spacing: 0.9px;
+        }
+
+        .player-head {
+          padding: 12px 14px;
+        }
+
+        .status {
+          right: 14px;
+          font-size: 11px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="top">
+        <div class="brand">
+          <img
+            src="https://r2.thesportsdb.com/images/media/league/badge/frdjqy1536585083.png"
+            alt="Shark Streams logo"
+            width="20"
+            height="20"
+            decoding="async"
+          />
+          <span>Shark Streams</span>
+        </div>
+      </header>
+
+      <main class="main">
+        <div class="ad-slot ad-slot--728x90" aria-label="Advertisement">
+          <script>
+            var atOptions = {
+              key: "8ac1580223e2c225ec4aebf348ecefe8",
+              format: "iframe",
+              height: 90,
+              width: 728,
+              params: {},
+            };
+          </script>
+          <script src="https://www.highperformanceformat.com/8ac1580223e2c225ec4aebf348ecefe8/invoke.js"></script>
+        </div>
+        <section class="player-card" aria-label="Stream player">
+          <div class="player-head">
+            <div class="title">
+              <a class="title-link" href="https://sportsurge.net" target="_blank" rel="noopener noreferrer"
+                >Sportsurge</a
+              >
+            </div>
+            <div class="status">HD • Auto</div>
+          </div>
+          <div class="player-wrap">
+            <iframe
+              src="https://streamtp10.com/global1.php?stream=espn2"
+              title="Stream Player"
+              allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+              allowfullscreen
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
+          </div>
+        </section>
+        <div class="ad-slot ad-slot--468x60" aria-label="Advertisement">
+          <script>
+            var atOptions = {
+              key: "0794be0b0e3a8fd7ca9fa49aa0b674b1",
+              format: "iframe",
+              height: 60,
+              width: 468,
+              params: {},
+            };
+          </script>
+          <script src="https://www.highperformanceformat.com/0794be0b0e3a8fd7ca9fa49aa0b674b1/invoke.js"></script>
+        </div>
+      </main>
+
+      <footer class="foot">
+        <span
+          >Disclaimer: This website does not host any videos. Streams shown here are embedded or linked
+          from external platforms (e.g., YouTube). We are not responsible for the legality of any
+          content. For legal requests, please contact the respective content owners or hosting
+          providers.</span
+        >
+      </footer>
+    </div>
+  </body>
+</html>
